@@ -1,13 +1,9 @@
 package com.example.birthdaycard
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,4 +20,5 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra(GreetingActivity.NAME_EXTRA,name)
         startActivity(intent)
     }
+
 }
