@@ -9,21 +9,26 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
+import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import kotlinx.android.synthetic.main.activity_greeting.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
+
 
 class GreetingActivity : AppCompatActivity() {
 
@@ -32,6 +37,9 @@ class GreetingActivity : AppCompatActivity() {
     }
 
     private lateinit var fileName : String
+
+    private var xDelta = 0
+    private var yDelta = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +50,40 @@ class GreetingActivity : AppCompatActivity() {
 
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+
+        birthdayGreeting.setOnTouchListener(onTouchListener())
+
+    }
+
+    private fun onTouchListener(): OnTouchListener {
+        return OnTouchListener { view, event ->
+
+            val x = event.rawX.toInt()
+            val y = event.rawY.toInt()
+
+            view.performClick()
+
+            when (event.action and MotionEvent.ACTION_MASK) {
+
+                MotionEvent.ACTION_DOWN -> {
+                    val lParams = view.layoutParams as RelativeLayout.LayoutParams
+                     xDelta = x - lParams.leftMargin
+                    yDelta = y - lParams.topMargin
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    val layoutParams = view
+                        .layoutParams as RelativeLayout.LayoutParams
+                    layoutParams.leftMargin = x- xDelta
+                    layoutParams.topMargin = y - yDelta
+                    layoutParams.rightMargin = 0
+                    layoutParams.bottomMargin = 0
+                    view.layoutParams = layoutParams
+                }
+            }
+            main.invalidate()
+            true
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

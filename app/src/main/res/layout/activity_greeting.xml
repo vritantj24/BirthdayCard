@@ -8,36 +8,31 @@
     app:cardBackgroundColor="@color/black"
     android:id="@+id/cardView">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/main">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/cake"
-        android:scaleType="centerCrop" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cake"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="-41dp" />
 
         <TextView
             android:id="@+id/birthdayGreeting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="cursive"
-            android:gravity="center_horizontal"
-            android:textAlignment="center"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:textColor="@color/design_default_color_primary"
             android:textSize="48sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.08"
             tools:text="textishere" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -13,9 +13,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun createBirthdayCard(view: View) {
+    fun createBirthdayCard(view : View) {
 
-        val name=name_input.editableText.toString()
+        val name=name_input.editableText.toString().trim()
         val intent= Intent(this,GreetingActivity::class.java)
         intent.putExtra(GreetingActivity.NAME_EXTRA,name)
         startActivity(intent)
